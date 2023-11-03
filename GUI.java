@@ -86,7 +86,9 @@ public class GUI {
 	}
 
 	
-	
+	public String getVersetext() {
+		return verse.getText() + "";
+	}
 public void tokenresultset(String s)
 {
 	resultArea.setText("");
