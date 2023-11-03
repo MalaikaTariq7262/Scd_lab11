@@ -86,7 +86,22 @@ public class GUI {
 	}
 
 	
-
+	
+public void tokenresultset(String s)
+{
+	resultArea.setText("");
+	String arr[]=TokeniseString(s);
+	 if
+	 (arr.length=='\0') {
+	  resultArea.append("No Tokens Available"); } else 
+	  {
+		  for(int i=0;i<arr.length;i++)
+		  {
+			  resultArea.append("Tokens are:");
+			  resultArea.append(arr[i]+"\n");
+		  }
+	 } 
+}
 	
 
 	
