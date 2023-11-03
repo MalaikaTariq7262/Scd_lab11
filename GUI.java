@@ -86,7 +86,49 @@ public class GUI {
 	}
 
 	
+public void page2() {
+		frame.removeAll();
 
+		
+		Label poemlbl = new Label("Enter Poem : ");
+		Label verselbl = new Label("Enter Verse : ");
+		
+		TextField poem = new TextField(30);
+	 verse = new TextField(30);
+		JButton addBtn = new JButton("Add");
+		
+		
+		frame.add(poemlbl);
+		frame.add(poem);
+		frame.add(verselbl);
+		frame.add(verse);
+		frame.add(addBtn);		
+	addBtn.addActionListener(new ActionListener()
+			{
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					String poemstring=poem.getText();
+					String versestring=verse.getText();
+					if(addPoem(poemstring)==true)
+					{
+						if(addVerse(poemstring,versestring)==true)
+						{
+						JOptionPane.showMessageDialog(frame, "Insert Successful ");
+						}
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(frame, "Insert Unsuccessful ");
+					}
+				}
+		
+			});
+		
+		
+
+	}
 	
 
 	
