@@ -162,6 +162,34 @@ public class GUI {
 				token.setText(selectedOption);
 			}
 		});
+addRootBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String s = getVersetext();
+		        String[] tokens = TokeniseString(s);
+			 dropdownToken.addItem(" ");
+		        for(int i=0;i<tokens.length;i++)
+		        {
+		        dropdownToken.addItem(tokens[i]);
+		        }
+				addRootBtn.setVisible(false);
+				tokenlbl.setVisible(true);
+				dropdownToken.setVisible(true);
+				rootlbl.setVisible(true);
+				dropdownRoot.setVisible(true);
+
+				addRootBtn.setVisible(true);
+				if(token.getText()!=" "&& root.getText()!="")
+				{				if(InsertToken(token.getText(),root.getText()))
+				{
+					JOptionPane.showMessageDialog(frame, "Insert Successful ");
+				}else
+				{
+					JOptionPane.showMessageDialog(frame, "Insert Unsuccessful ");
+				}
+				}
+			}
+		});
 	
 	}
 
