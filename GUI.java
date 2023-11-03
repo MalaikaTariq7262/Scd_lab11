@@ -156,6 +156,22 @@ dropdownVerse.addActionListener(new ActionListener() {
 					}
 			
 		});
+Tokenise.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        String s = getVersetext();
+		        String[] tokens = TokeniseString(s); // Call your tokenization method
+		        if (tokens.length > 0) {
+		            resultArea.setText("Tokens are:\n");
+		            for (String token : tokens) {
+		                resultArea.append(token + "\n");
+		            }
+		        } else {
+		            resultArea.setText("No Tokens Available");
+		        }
+		        addRootBtn.setVisible(true);
+		    }
+		});
 	
 	}
 
