@@ -84,6 +84,10 @@ public class GUI {
 		});
 
 	}
+public String[] TokeniseString(String s) {
+		String[] arr = s.split(" ");
+		return arr;
+
 
 		public boolean addRoot(String Root) {
 		try {
@@ -93,6 +97,57 @@ public class GUI {
 			preparedStatement.setString(1, Root);
 
 			int rowsInserted = preparedStatement.executeUpdate();
+
+	}
+public String[] verseDrop() {
+		String Filename = "PoemFile.txt";
+		ArrayList<String> arr = new ArrayList<String>();
+		String s = " ";
+		arr.add(s);
+		try (BufferedReader f = new BufferedReader(new FileReader(Filename))) {
+			String line;
+			while ((line = f.readLine()) != null) {
+				addVerse("poem1",line);
+				arr.add(line);
+			}
+			String[] arrs = new String[arr.size()];
+			for (int i = 0; i < arr.size(); i++) {
+				arrs[i] = arr.get(i);
+
+			}
+			return arrs;
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+	
+	public String getVersetext() {
+		return verse.getText() + "";
+	}
+public void tokenresultset(String s)
+{
+	resultArea.setText("");
+	String arr[]=TokeniseString(s);
+	 if
+	 (arr.length=='\0') {
+	  resultArea.append("No Tokens Available"); } else 
+	  {
+		  for(int i=0;i<arr.length;i++)
+		  {
+			  resultArea.append("Tokens are:");
+			  resultArea.append(arr[i]+"\n");
+		  }
+	 } 
+}
+	
+
 
 			if (rowsInserted > 0) {
 				return true;
@@ -208,6 +263,7 @@ public class GUI {
 		addBtn.setActionCommand("AddPoem");
 		addRootBtn.setActionCommand("AddRoot");
 		Tokenise.setActionCommand("Tokenise");
+
 	dropdownRoot.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -251,6 +307,32 @@ addRootBtn.addActionListener(new ActionListener() {
 				}
 				}
 			}
+
+dropdownVerse.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				String selectedOption = (String) dropdownVerse.getSelectedItem();
+				verse.setText(selectedOption);
+				
+					}
+			
+		});
+Tokenise.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        String s = getVersetext();
+		        String[] tokens = TokeniseString(s); // Call your tokenization method
+		        if (tokens.length > 0) {
+		            resultArea.setText("Tokens are:\n");
+		            for (String token : tokens) {
+		                resultArea.append(token + "\n");
+		            }
+		        } else {
+		            resultArea.setText("No Tokens Available");
+		        }
+		        addRootBtn.setVisible(true);
+}
 		});
 	
 	}
