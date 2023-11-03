@@ -130,7 +130,31 @@ public void page2() {
 
 	}
 	
-
+public boolean addVerse(String PoemName,String Verse) {
+		try {
+			String query = "SELECT poemId FROM poem WHERE PoemName = ?";
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, PoemName);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			int poem_id = 0;
+			while (resultSet.next()) {
+				poem_id = resultSet.getInt("poemId");
+			}
+			query = "INSERT INTO verse (poemId,Verse)" + " VALUES (?,?);";
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, poem_id);
+			preparedStatement.setString(2, Verse);
+			
+			int check=preparedStatement.executeUpdate();
+			
+			if (check > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.getMessage();
+		}
+		return false;
+	}
 	
 
 	public void page3() {
