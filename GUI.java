@@ -85,7 +85,23 @@ public class GUI {
 
 	}
 
-	
+		public boolean addRoot(String Root) {
+		try {
+			
+			String sql = "INSERT INTO roots (root) VALUES (?)";
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, Root);
+
+			int rowsInserted = preparedStatement.executeUpdate();
+
+			if (rowsInserted > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 	public String[] roots() {
 		String Filename = "Roots.txt";
@@ -116,7 +132,7 @@ public class GUI {
 		}
 		return null;
 
-	}
+	}add
 
 	
 
