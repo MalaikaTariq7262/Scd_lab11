@@ -129,6 +129,25 @@ public void page2() {
 		
 
 	}
+public boolean addPoem(String poemname)
+{
+	try {
+		
+		String sql = "INSERT INTO poem (PoemName) VALUES (?)";
+		preparedStatement = connection.prepareStatement(sql);
+		preparedStatement.setString(1, poemname);
+
+		int rowsInserted = preparedStatement.executeUpdate();
+
+		if (rowsInserted > 0) {
+			return true;
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return false;
+	
+}
 	
 public boolean addVerse(String PoemName,String Verse) {
 		try {
