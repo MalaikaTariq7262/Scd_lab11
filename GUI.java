@@ -134,7 +134,24 @@ public class GUI {
 
 	}add
 
-	
+	public boolean InsertToken(String root, String token) {
+	    try {
+	       
+	      String tokenInsertQuery = "INSERT INTO tokens (token,root) VALUES (?, ?)";
+	        preparedStatement = connection.prepareStatement(tokenInsertQuery);
+	        preparedStatement.setString(1, token);
+	        preparedStatement.setString(2, root);
+
+	        int rowsInserted = preparedStatement.executeUpdate();
+
+	        if (rowsInserted > 0) {
+	            return true;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return false;
+	}
 
 	public void page3() {
 		frame.removeAll();
