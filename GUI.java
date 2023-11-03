@@ -84,7 +84,34 @@ public class GUI {
 		});
 
 	}
+public String[] verseDrop() {
+		String Filename = "PoemFile.txt";
+		ArrayList<String> arr = new ArrayList<String>();
+		String s = " ";
+		arr.add(s);
+		try (BufferedReader f = new BufferedReader(new FileReader(Filename))) {
+			String line;
+			while ((line = f.readLine()) != null) {
+				addVerse("poem1",line);
+				arr.add(line);
+			}
+			String[] arrs = new String[arr.size()];
+			for (int i = 0; i < arr.size(); i++) {
+				arrs[i] = arr.get(i);
 
+			}
+			return arrs;
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}
 	
 	public String getVersetext() {
 		return verse.getText() + "";
