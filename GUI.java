@@ -84,6 +84,11 @@ public class GUI {
 		});
 
 	}
+public String[] TokeniseString(String s) {
+		String[] arr = s.split(" ");
+		return arr;
+
+	}
 public String[] verseDrop() {
 		String Filename = "PoemFile.txt";
 		ArrayList<String> arr = new ArrayList<String>();
