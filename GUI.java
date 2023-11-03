@@ -146,6 +146,16 @@ public class GUI {
 		addBtn.setActionCommand("AddPoem");
 		addRootBtn.setActionCommand("AddRoot");
 		Tokenise.setActionCommand("Tokenise");
+dropdownVerse.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				String selectedOption = (String) dropdownVerse.getSelectedItem();
+				verse.setText(selectedOption);
+				
+					}
+			
+		});
 	
 	}
 
