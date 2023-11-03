@@ -148,6 +148,14 @@ public boolean addPoem(String poemname)
 	return false;
 	
 }
+
+	public void setActionListener(ActionListener al) {
+		dropdownRoot.addActionListener(al);
+		dropdownToken.addActionListener(al);
+		addBtn.addActionListener(al);
+		addRootBtn.addActionListener(al);
+		Tokenise.addActionListener(al);
+	}
 	
 public boolean addVerse(String PoemName,String Verse) {
 		try {
