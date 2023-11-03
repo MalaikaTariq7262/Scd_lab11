@@ -87,7 +87,36 @@ public class GUI {
 
 	
 
-	
+	public String[] roots() {
+		String Filename = "Roots.txt";
+		ArrayList<String> arr = new ArrayList<String>();
+		String s = " ";
+		arr.add(s);
+		try (BufferedReader f = new BufferedReader(new FileReader(Filename))) {
+			String line;
+			while ((line = f.readLine()) != null) {
+				String[] arrline = line.split(" ");
+				for (int i = 0; i < arrline.length; i++) {
+					arr.add(arrline[i]);
+				}
+			}
+			String[] arrs = new String[arr.size()];
+			for (int i = 0; i < arr.size(); i++) {
+				arrs[i] = arr.get(i);
+//addRoot(arr.get(i)); roots added in data base 
+			}
+			return arrs;
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}
 
 	
 
