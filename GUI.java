@@ -84,6 +84,7 @@ public class GUI {
 		});
 
 	}
+
 public boolean addRoot(String Root) {
 		try {
 			
@@ -102,6 +103,69 @@ public boolean addRoot(String Root) {
 		return false;
 	}
 
+public String[] TokeniseString(String s) {
+		String[] arr = s.split(" ");
+		return arr;
+}
+
+
+		public boolean addRoot(String Root) {
+		try {
+			
+			String sql = "INSERT INTO roots (root) VALUES (?)";
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, Root);
+
+			int rowsInserted = preparedStatement.executeUpdate();
+
+	}
+public String[] verseDrop() {
+		String Filename = "PoemFile.txt";
+		ArrayList<String> arr = new ArrayList<String>();
+		String s = " ";
+		arr.add(s);
+		try (BufferedReader f = new BufferedReader(new FileReader(Filename))) {
+			String line;
+			while ((line = f.readLine()) != null) {
+				addVerse("poem1",line);
+				arr.add(line);
+			}
+			String[] arrs = new String[arr.size()];
+			for (int i = 0; i < arr.size(); i++) {
+				arrs[i] = arr.get(i);
+
+			}
+			return arrs;
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+	
+	public String getVersetext() {
+		return verse.getText() + "";
+	}
+public void tokenresultset(String s)
+{
+	resultArea.setText("");
+	String arr[]=TokeniseString(s);
+	 if
+	 (arr.length=='\0') {
+	  resultArea.append("No Tokens Available"); } else 
+	  {
+		  for(int i=0;i<arr.length;i++)
+		  {
+			  resultArea.append("Tokens are:");
+			  resultArea.append(arr[i]+"\n");
+		  }
+	 } 
+}
 	
 public void page2() {
 		frame.removeAll();
@@ -201,6 +265,67 @@ public boolean addVerse(String PoemName,String Verse) {
 	}
 	
 
+
+			if (rowsInserted > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public String[] roots() {
+		String Filename = "Roots.txt";
+		ArrayList<String> arr = new ArrayList<String>();
+		String s = " ";
+		arr.add(s);
+		try (BufferedReader f = new BufferedReader(new FileReader(Filename))) {
+			String line;
+			while ((line = f.readLine()) != null) {
+				String[] arrline = line.split(" ");
+				for (int i = 0; i < arrline.length; i++) {
+					arr.add(arrline[i]);
+				}
+			}
+			String[] arrs = new String[arr.size()];
+			for (int i = 0; i < arr.size(); i++) {
+				arrs[i] = arr.get(i);
+//addRoot(arr.get(i)); roots added in data base 
+			}
+			return arrs;
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}add
+
+	public boolean InsertToken(String root, String token) {
+	    try {
+	       
+	      String tokenInsertQuery = "INSERT INTO tokens (token,root) VALUES (?, ?)";
+	        preparedStatement = connection.prepareStatement(tokenInsertQuery);
+	        preparedStatement.setString(1, token);
+	        preparedStatement.setString(2, root);
+
+	        int rowsInserted = preparedStatement.executeUpdate();
+
+	        if (rowsInserted > 0) {
+	            return true;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return false;
+	}
+
+
 	public void page3() {
 		frame.removeAll();
 		InputPanel = new Panel();
@@ -256,6 +381,77 @@ public boolean addVerse(String PoemName,String Verse) {
 		addBtn.setActionCommand("AddPoem");
 		addRootBtn.setActionCommand("AddRoot");
 		Tokenise.setActionCommand("Tokenise");
+
+	dropdownRoot.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				String selectedOption = (String) dropdownRoot.getSelectedItem();
+				root.setText(selectedOption);
+			}
+		});
+		dropdownToken.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 
+				String selectedOption = (String) dropdownToken.getSelectedItem();
+				token.setText(selectedOption);
+			}
+		});
+addRootBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String s = getVersetext();
+		        String[] tokens = TokeniseString(s);
+			 dropdownToken.addItem(" ");
+		        for(int i=0;i<tokens.length;i++)
+		        {
+		        dropdownToken.addItem(tokens[i]);
+		        }
+				addRootBtn.setVisible(false);
+				tokenlbl.setVisible(true);
+				dropdownToken.setVisible(true);
+				rootlbl.setVisible(true);
+				dropdownRoot.setVisible(true);
+
+				addRootBtn.setVisible(true);
+				if(token.getText()!=" "&& root.getText()!="")
+				{				if(InsertToken(token.getText(),root.getText()))
+				{
+					JOptionPane.showMessageDialog(frame, "Insert Successful ");
+				}else
+				{
+					JOptionPane.showMessageDialog(frame, "Insert Unsuccessful ");
+				}
+				}
+			}
+
+dropdownVerse.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				String selectedOption = (String) dropdownVerse.getSelectedItem();
+				verse.setText(selectedOption);
+				
+					}
+			
+		});
+Tokenise.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        String s = getVersetext();
+		        String[] tokens = TokeniseString(s); // Call your tokenization method
+		        if (tokens.length > 0) {
+		            resultArea.setText("Tokens are:\n");
+		            for (String token : tokens) {
+		                resultArea.append(token + "\n");
+		            }
+		        } else {
+		            resultArea.setText("No Tokens Available");
+		        }
+		        addRootBtn.setVisible(true);
+}
+		});
 	
 	}
 
